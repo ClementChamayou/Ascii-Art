@@ -16,8 +16,8 @@
 
 int main(){
 
-    FILE * file = fopen("chat.pgm","r");
-    FILE * output = fopen("AsciiArt.txt","w");
+    FILE * file = fopen("logo_apple.pgm","r");
+    FILE * output = fopen("apple.txt","w");
     char magicNb[2];
     int row,col,nbNiveaux;
 
@@ -33,7 +33,10 @@ int main(){
        
         char imgAscii [row][col];
         char Ascii16[16] = { '.', '-', '_', '/', '|', '(', 'c', 'v', 'u', 'J', 'U', 'Y', 'k', 'b', '#', '@' };
-        int temp, ratio;
+        int temp;
+
+        /* Ramener à 16 niveaux de gris */
+        int ratio = (nbNiveaux+1) / 16;
        
         for (int i=0; i<row; i++){
 
@@ -41,8 +44,7 @@ int main(){
 
                 /* Obtenir la valeur du pixel[i][j] */
                 fscanf(file,"%d",&temp);
-                /* Ramener à 16 niveaux de gris */
-                ratio = nbNiveaux / 16;
+                
                 temp = temp / ratio ;
                 
                 switch (temp){
@@ -108,6 +110,8 @@ int main(){
 
     }
     fclose(file);
+    fclose(output);
+
     return 0;
 
 }
