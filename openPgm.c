@@ -17,8 +17,9 @@
 int main(){
 
     FILE * file = fopen("chat.pgm","r");
+    FILE * output = fopen("AsciiArt.txt","w");
     char magicNb[2];
-    int header[3];
+    int row,col,nbNiveaux;
 
     if(!file){
         printf("Il y a un problème d'ouverture de fichier.\n");
@@ -27,12 +28,8 @@ int main(){
     }
     else{
         
-        fscanf(file,"%s %d %d %d",magicNb,&header[0],&header[1],&header[2]);
-        printf("Nombre magique : %s\nLargeur : %d\nHauteur : %d\nValeur maximale : %d\n",magicNb,header[0],header[1],header[2]);
-
-        int row = header[1];
-        int col = header[0];
-        int nbNiveaux = header[2];
+        fscanf(file,"%s %d %d %d",magicNb,&col,&row,&nbNiveaux);
+        //printf("Nombre magique : %s\nLargeur : %d\nHauteur : %d\nValeur maximale : %d\n",magicNb,header[0],header[1],header[2]);
        
         char imgAscii [row][col];
         char Ascii16[16] = { '.', '-', '_', '/', '|', '(', 'c', 'v', 'u', 'J', 'U', 'Y', 'k', 'b', '#', '@' };
@@ -95,15 +92,17 @@ int main(){
                         imgAscii[i][j] =Ascii16[14];
                         break;
                     case 15: 
-                        imgAscii[i][j] =Ascii16[15];
+                        imgAscii[i][j] = Ascii16[15];
                         break;
                     
                     
                 }	
-                printf("%c",imgAscii[i][j]);
+                fprintf(output,"%c", imgAscii[i][j]);
+                //printf("%c",imgAscii[i][j]);
                 
             }
-            printf("\n");
+            fprintf(output,"%s","\n");
+            //printf("\n");
 
         }
 
