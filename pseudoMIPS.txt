@@ -1,0 +1,227 @@
+	 .data
+ascii16: .ascii ".", "-", "_", "/", "|", "(", "c", "v", "u", "J", "U", "Y", "k", "b", "#", "@"
+tabEtq:	 .word Etq0, Etq1, Etq2, Etq3, Etq4, Etq5, Etq6, Etq7, Etq8, Etq9, Etq10, Etq11, Etq12, Etq13, Etq14, Etq15 
+
+	 .text
+	 #syscall pour ouvrir l'image
+	 #syscall pour lire le magicNb
+	 #syscall pour lire la hauteur qui sera enregistré dans le registre $t0, la largeur dans $t1 et la valeurMax dans $t2
+	 #Calcul du ratio pour ramener à 16 niveaux de gris
+	 addi $t2, $t2, 1
+	 sll $t2, $t2, 4 #Division par 16 pour obtenir le ratio
+	 la $t8, ascii16
+	 la $t9, tabEtq
+	 addi $t0, $t0, 1
+BOUCLEi:
+	or $t3, $t1, $zero #Reinitialiser le compteur de la boucle j
+	subi $t0, $t0, 1 #Mise à jour du compteur de la boucle i
+	beq $t0, $zero, SUITE
+BOUCLEj:
+	beq $t3, $zero, BOUCLEi
+	#syscall pour lire le pixel qui sera enregistré dans le registre $t4
+	#Ramener à 16 niveaux de gris en divisant par le ratio
+	div $t4, $t2
+	mflo $t4
+	#Calcul de l'étiquette correspondante qui sera enregistrée dans $t5
+	or $t5, $t4, $zero
+	sll $t5, $t5, 2 
+	addi $t5, $t5, $t9
+	lw $t5, 0($t5)
+	jr $t5
+Etq0:
+	#Recupérer le caractère adéquat du tableau ascii16 dans le registre $t6
+	add $t6, $t8, $t4
+	lw $t6, 0($t6)
+	#syscall pour écrire le caractère dans le fichier .txt
+	#syscall pour afficher sur la fenêtre
+	ori $v0, $zero, 4
+	or $a0, $t6, $zero
+	syscall
+	#Retour à la boucle j
+	subi $t3, $t3, 1
+	j BOUCLEj
+Etq1:
+	#Recupérer le caractère adéquat du tableau ascii16 dans le registre $t6
+	add $t6, $t8, $t4
+	lw $t6, 0($t6)
+	#syscall pour écrire le caractère dans le fichier .txt	
+	#syscall pour afficher sur la fenêtre
+	ori $v0, $zero, 4
+	or $a0, $t6, $zero
+	syscall
+	#Retour à la boucle j
+	subi $t3, $t3, 1
+	j BOUCLEj
+Etq2:
+	#Recupérer le caractère adéquat du tableau ascii16 dans le registre $t6
+	add $t6, $t8, $t4
+	lw $t6, 0($t6)
+	#syscall pour écrire le caractère dans le fichier .txt
+	#syscall pour afficher sur la fenêtre
+	ori $v0, $zero, 4
+	or $a0, $t6, $zero
+	syscall
+	#Retour à la boucle j
+	subi $t3, $t3, 1
+	j BOUCLEj
+Etq3:
+	#Recupérer le caractère adéquat du tableau ascii16 dans le registre $t6
+	add $t6, $t8, $t4
+	lw $t6, 0($t6)
+	#syscall pour écrire le caractère dans le fichier .txt
+	#syscall pour afficher sur la fenêtre
+	ori $v0, $zero, 4
+	or $a0, $t6, $zero
+	syscall
+	#Retour à la boucle j
+	subi $t3, $t3, 1
+	j BOUCLEj
+Etq4:
+	#Recupérer le caractère adéquat du tableau ascii16 dans le registre $t6
+	add $t6, $t8, $t4
+	lw $t6, 0($t6)
+	#syscall pour écrire le caractère dans le fichier .txt
+	#syscall pour afficher sur la fenêtre
+	ori $v0, $zero, 4
+	or $a0, $t6, $zero
+	syscall
+	#Retour à la boucle j
+	subi $t3, $t3, 1
+	j BOUCLEj
+Etq5:
+	#Recupérer le caractère adéquat du tableau ascii16 dans le registre $t6
+	add $t6, $t8, $t4
+	lw $t6, 0($t6)
+	#syscall pour écrire le caractère dans le fichier .txt
+	#syscall pour afficher sur la fenêtre
+	ori $v0, $zero, 4
+	or $a0, $t6, $zero
+	syscall
+	#Retour à la boucle j
+	subi $t3, $t3, 1
+	j BOUCLEj
+Etq6:
+	#Recupérer le caractère adéquat du tableau ascii16 dans le registre $t6
+	add $t6, $t8, $t4
+	lw $t6, 0($t6)
+	#syscall pour écrire le caractère dans le fichier .txt
+	#syscall pour afficher sur la fenêtre
+	ori $v0, $zero, 4
+	or $a0, $t6, $zero
+	syscall
+	#Retour à la boucle j
+	subi $t3, $t3, 1
+	j BOUCLEj
+Etq7:
+	#Recupérer le caractère adéquat du tableau ascii16 dans le registre $t6
+	add $t6, $t8, $t4
+	lw $t6, 0($t6)
+	#syscall pour écrire le caractère dans le fichier .txt
+	#syscall pour afficher sur la fenêtre
+	ori $v0, $zero, 4
+	or $a0, $t6, $zero
+	syscall
+	#Retour à la boucle j
+	subi $t3, $t3, 1
+	j BOUCLEj
+Etq8:
+	#Recupérer le caractère adéquat du tableau ascii16 dans le registre $t6
+	add $t6, $t8, $t4
+	lw $t6, 0($t6)
+	#syscall pour écrire le caractère dans le fichier .txt
+	#syscall pour afficher sur la fenêtre
+	ori $v0, $zero, 4
+	or $a0, $t6, $zero
+	syscall
+	#Retour à la boucle j
+	subi $t3, $t3, 1
+	j BOUCLEj
+Etq9:
+	#Recupérer le caractère adéquat du tableau ascii16 dans le registre $t6
+	add $t6, $t8, $t4
+	lw $t6, 0($t6)
+	#syscall pour écrire le caractère dans le fichier .txt
+	#syscall pour afficher sur la fenêtre
+	ori $v0, $zero, 4
+	or $a0, $t6, $zero
+	syscall
+	#Retour à la boucle j
+	subi $t3, $t3, 1
+	j BOUCLEj
+Etq10:
+	#Recupérer le caractère adéquat du tableau ascii16 dans le registre $t6
+	add $t6, $t8, $t4
+	lw $t6, 0($t6)
+	#syscall pour écrire le caractère dans le fichier .txt
+	#syscall pour afficher sur la fenêtre
+	ori $v0, $zero, 4
+	or $a0, $t6, $zero
+	syscall
+	#Retour à la boucle j
+	subi $t3, $t3, 1
+	j BOUCLEj
+Etq11:
+	#Recupérer le caractère adéquat du tableau ascii16 dans le registre $t6
+	add $t6, $t8, $t4
+	lw $t6, 0($t6)
+	#syscall pour écrire le caractère dans le fichier .txt
+	#syscall pour afficher sur la fenêtre
+	ori $v0, $zero, 4
+	or $a0, $t6, $zero
+	syscall
+	#Retour à la boucle j
+	subi $t3, $t3, 1
+	j BOUCLEj
+Etq12:
+	#Recupérer le caractère adéquat du tableau ascii16 dans le registre $t6
+	add $t6, $t8, $t4
+	lw $t6, 0($t6)
+	#syscall pour écrire le caractère dans le fichier .txt
+	#syscall pour afficher sur la fenêtre
+	ori $v0, $zero, 4
+	or $a0, $t6, $zero
+	syscall
+	#Retour à la boucle j
+	subi $t3, $t3, 1
+	j BOUCLEj
+Etq13:
+	#Recupérer le caractère adéquat du tableau ascii16 dans le registre $t6
+	add $t6, $t8, $t4
+	lw $t6, 0($t6)
+	#syscall pour écrire le caractère dans le fichier .txt
+	#syscall pour afficher sur la fenêtre
+	ori $v0, $zero, 4
+	or $a0, $t6, $zero
+	syscall
+	#Retour à la boucle j
+	subi $t3, $t3, 1
+	j BOUCLEj
+Etq14:
+	#Recupérer le caractère adéquat du tableau ascii16 dans le registre $t6
+	add $t6, $t8, $t4
+	lw $t6, 0($t6)
+	#syscall pour écrire le caractère dans le fichier .txt
+	#syscall pour afficher sur la fenêtre
+	ori $v0, $zero, 4
+	or $a0, $t6, $zero
+	syscall
+	#Retour à la boucle j
+	subi $t3, $t3, 1
+	j BOUCLEj
+Etq15:
+	#Recupérer le caractère adéquat du tableau ascii16 dans le registre $t6
+	add $t6, $t8, $t4
+	lw $t6, 0($t6)
+	#syscall pour écrire le caractère dans le fichier .txt
+	#syscall pour afficher sur la fenêtre
+	ori $v0, $zero, 4
+	or $a0, $t6, $zero
+	syscall
+	#Retour à la boucle j
+	subi $t3, $t3, 1
+	j BOUCLEj
+SUITE: #exit
+	ori $v0, $zero, 10
+	syscall
+	
+	
